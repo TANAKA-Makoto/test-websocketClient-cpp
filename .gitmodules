@@ -1,3 +1,0 @@
-[submodule "third-party/websocketpp"]
-	path = third-party/websocketpp
-	url = git@github.com:bitshares/websocketpp.git
