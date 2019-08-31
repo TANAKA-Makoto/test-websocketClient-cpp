@@ -4,11 +4,16 @@ set(CMAKE_C_COMPILER $ENV{CC})
 set(CMAKE_CXX_COMPILER $ENV{CXX})
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
+
+#set(BOOST_ROOT ~/Document/boost/boost)
+
+
 set(EXECUTABLE_OUTPUT_PATH "out/sample")
 
 include_directories("src")
-include_directories("third_party/abseil-cpp")
-#include_directories("/boost/")
+include_directories("third-party/websocketpp/")
+include_directories("third-party/boost/")
+#link_directories("third-party/websocketpp/")
 
 #link_directories("/web/src/out/Develop/obj")
 
@@ -39,22 +44,49 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MMD -MP")
 add_executable(sample
   src/main.cc
   )
-
+add_executable(client
+  src/client.cc
+  )
+# add_executable(echo_client
+#   src/echo_client.cc
+#   )
 target_link_libraries(sample
 #  ${X11_LIBRARIES}
-  X11
-  Xau
-  Xdmcp
-  xcb
-  plds4
-  Xext
-  expat
+  crypto
   dl
+  expat
+  nspr4
   nss3
   nssutil3
   plc4
-  nspr4
-  rt
+  plds4
   pthread
+  rt
+  ssl
+  X11
+  Xau
+  xcb
+  Xdmcp
+  Xext
+  z
   )
-
+target_link_libraries(client
+#  ${X11_LIBRARIES}
+  crypto
+  dl
+  expat
+  nspr4
+  nss3
+  nssutil3
+  plc4
+  plds4
+  pthread
+  rt
+  ssl
+  X11
+  Xau
+  xcb
+  Xdmcp
+  Xext
+  z
+  )
