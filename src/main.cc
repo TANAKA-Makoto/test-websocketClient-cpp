@@ -1,3 +1,6 @@
+#define BOOST_ERROR_CODE_HEADER_ONLY
+#define BOOST_SYSTEM_NO_LIB
+
 #include <iostream>
 
 #include "websocketpp/config/asio_no_tls.hpp"

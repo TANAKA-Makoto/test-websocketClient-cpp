@@ -1,0 +1,6 @@
+[submodule "third-party/websocketpp"]
+	path = third-party/websocketpp
+	url = git@github.com:bitshares/websocketpp.git
+[submodule "third-party/boost"]
+	path = third-party/boost
+	url = https://github.com/boostorg/boost.git
