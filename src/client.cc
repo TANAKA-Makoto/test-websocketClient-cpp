@@ -1,5 +1,12 @@
+#define BOOST_ERROR_CODE_HEADER_ONLY
+#define BOOST_SYSTEM_NO_LIB
+
+#include <websocketpp/config/asio_no_tls_client.hpp>
+#include <websocketpp/client.hpp>
 #include <iostream>
 #include <string>
+typedef websocketpp::client<websocketpp::config::asio_client> client;
+
 int main() {
     bool done = false;
     std::string input;
