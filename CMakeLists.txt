@@ -46,6 +46,11 @@ add_executable(sample
   )
 add_executable(client
   src/one_client.cc
+  src/ws/websocket_endpoint.cc
+  src/ws/websocket_endpoint.h
+  src/ws/websocket_meta.cc
+  src/ws/websocket_meta.h
+
   )
 add_executable(example
   src/example.cc
