@@ -16,7 +16,7 @@ public:
     int connect(std::string const & uri);
     void close(websocketpp::close::status::value code, std::string reason);
     void send(std::string message);
-    Connection_meta::ptr get_metadata(int id) const;
+    Connection_meta::ptr get_metadata() const;
 private:
     typedef std::map<int,Connection_meta::ptr> con_list;
     client m_endpoint;

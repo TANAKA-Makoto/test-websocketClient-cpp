@@ -16,5 +16,6 @@ int main() {
   sleep(1);
   endpoint.send("hoge");
   sleep(1);
+  std::cout << endpoint.get_metadata()->get_status() <<std::endl;
   endpoint.close(1000,"test");
 }

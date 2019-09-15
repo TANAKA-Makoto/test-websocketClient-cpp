@@ -96,11 +96,6 @@ void websocket_endpoint::send(std::string message){
   one_con->record_sent_message(message);
 }
 
-Connection_meta::ptr websocket_endpoint::get_metadata(int id) const {
-    con_list::const_iterator metadata_it = m_connection_list.find(id);
-    if (metadata_it == m_connection_list.end()) {
-        return Connection_meta::ptr();
-    } else {
-        return metadata_it->second;
-    }
+Connection_meta::ptr websocket_endpoint::get_metadata() const {
+  return one_con;
 }
