@@ -31,6 +31,8 @@ class Connection_meta {
      int get_id() const;
 
      std::string get_status() const;
+     //  新しい接続を作っていいかにつかう。"connecting" "Open"で真
+     bool is_running() const;
 
      void record_sent_message(std::string message);
 

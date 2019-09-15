@@ -45,6 +45,10 @@ int Connection_meta::get_id() const {
 std::string Connection_meta::get_status() const {
     return m_status;
 }
+bool Connection_meta::is_running() const {
+  if (m_status == "Connecting" || m_status == "Open") return true;
+  return false;
+}
 void Connection_meta::record_sent_message(std::string message) {
     m_messages.push_back(">> " + message);
 }

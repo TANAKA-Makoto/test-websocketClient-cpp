@@ -11,28 +11,31 @@ websocket_endpoint::websocket_endpoint() : m_next_id(0) {
 
 websocket_endpoint::~websocket_endpoint(){
   m_endpoint.stop_perpetual();
-
-  std::cout << "> Closing connection " << one_con->get_id() << std::endl;
-  websocketpp::lib::error_code ec;
-    m_endpoint.close(one_con->get_hdl(), websocketpp::close::status::going_away, "", ec);
-    if (ec) {
-      std::cout << "> Error closing connection " << one_con->get_id() << ": "
-                << ec.message() << std::endl;
-    }
-
+  if(one_con != nullptr){
+    std::cout << "> Closing connection " << one_con->get_id() << std::endl;
+    websocketpp::lib::error_code ec;
+      m_endpoint.close(one_con->get_hdl(), websocketpp::close::status::going_away, "", ec);
+      if (ec) {
+        std::cout << "> Error closing connection " << one_con->get_id() << ": "
+                  << ec.message() << std::endl;
+      }
+  }
   m_thread->join();
 }
 
 int websocket_endpoint::connect(std::string const & uri) {
+  if (one_con != nullptr && one_con->is_running())
+  {
+    std::cout << "connection alrady exists." << std::endl;
+    return -1;
+  }
   websocketpp::lib::error_code ec;
   client::connection_ptr con = m_endpoint.get_connection(uri, ec);
   if (ec) {
     std::cout << "> Connect initialization error: " << ec.message() << std::endl;
     return -1;
   }
-  //int new_id = m_next_id++;
   Connection_meta::ptr metadata_ptr(new Connection_meta(1, con->get_handle(), uri));
-  //m_connection_list[new_id] = metadata_ptr;
   one_con = metadata_ptr;
   con->set_open_handler(websocketpp::lib::bind(
     &Connection_meta::on_open,
@@ -75,7 +78,7 @@ void websocket_endpoint::close(websocketpp::close::status::value code, std::stri
   if (ec){
     std::cout << "> Error initiating close: " << ec.message() << std::endl;
   }
-  //one_con = nullptr;
+  one_con = nullptr;
 }
 
 void websocket_endpoint::send(std::string message){
