@@ -33,7 +33,7 @@ pkg_search_module(X11 REQUIRED x11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DWEBRTC_LINUX=1 -DWEBRTC_POSIX=1" )
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-parameter")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g") # for debug
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g") # for debug
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MMD -MP")
 
 # Disable RTTI
@@ -45,7 +45,10 @@ add_executable(sample
   src/main.cc
   )
 add_executable(client
-  src/client.cc
+  src/one_client.cc
+  )
+add_executable(example
+  src/example.cc
   )
 # add_executable(echo_client
 #   src/echo_client.cc
@@ -71,6 +74,26 @@ target_link_libraries(sample
   z
   )
 target_link_libraries(client
+#  ${X11_LIBRARIES}
+  crypto
+  dl
+  expat
+  nspr4
+  nss3
+  nssutil3
+  plc4
+  plds4
+  pthread
+  rt
+  ssl
+  X11
+  Xau
+  xcb
+  Xdmcp
+  Xext
+  z
+  )
+target_link_libraries(example
 #  ${X11_LIBRARIES}
   crypto
   dl
